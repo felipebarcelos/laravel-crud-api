@@ -46,7 +46,7 @@ Na sequência, execute o comando:
 
 O comando acima irá criar nossas tabelas de migrations e contatos.
 
-## Registrando usuário na API:
+## Registrando usuário na API (Postman):
 
 Primeiro é necessário registrar para conseguir obter o token de acesso:
 
@@ -60,11 +60,11 @@ Após fazer o registro do usuário na aplicação é necessário fazer o login n
 
 Parametros: email e password. Será retornado o token.
 
-## Consumindo a API:
+## Consumindo a API (Postman):
 
-Abra o Postman e digite a seguinte URL:
+Digite a seguinte URL (GET) para retornar os contatos:
 
-- http://localhost:8889/contato
+- http://localhost:8889/contatos
 
 No HEADER é necessário informar dois parametros, conforme abaixo:
 
@@ -75,6 +75,8 @@ No HEADER é necessário informar dois parametros, conforme abaixo:
     'Authorization' => 'Bearer '.$accessToken,
 
 ]
+
+Para demais rotas da API, utilize a tabela descrita no último tópico deste tutorial.
 
 $accessToken será substituido pelo TOKEN retornado no momento em que fazemos o login na API, exemplo de Authorization:
 
