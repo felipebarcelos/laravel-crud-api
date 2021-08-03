@@ -95,14 +95,14 @@ Pronto, agora pode utilizar a vontade! Crie novos contatos, edite e remova os co
 
 | Method    | URI                         | Name             | Action                                          | Middleware   |
 |-----------|-----------------------------|------------------|-------------------------------------------------|--------------|
-| GET|HEAD  | /                           |                  | Closure                                         | web          |
-| GET|HEAD  | api/contatos                | contatos.index   | App\Http\Controllers\ContatoController@index    | api auth:api |
-| POST  |   | api/contatos                | contatos.store   | App\Http\Controllers\ContatoController@store    | api auth:api |
-| GET|HEAD  | api/contatos/create         | contatos.create  | App\Http\Controllers\ContatoController@create   | api auth:api |
-| GET|HEAD  | api/contatos/{contato}      | contatos.show    | App\Http\Controllers\ContatoController@show     | api auth:api |
-| PUT|PATCH | api/contatos/{contato}      | contatos.update  | App\Http\Controllers\ContatoController@update   | api auth:api |
+| GET-HEAD  | /                           |                  | Closure                                         | web          |
+| GET-HEAD  | api/contatos                | contatos.index   | App\Http\Controllers\ContatoController@index    | api auth:api |
+| POST      | api/contatos                | contatos.store   | App\Http\Controllers\ContatoController@store    | api auth:api |
+| GET-HEAD  | api/contatos/create         | contatos.create  | App\Http\Controllers\ContatoController@create   | api auth:api |
+| GET-HEAD  | api/contatos/{contato}      | contatos.show    | App\Http\Controllers\ContatoController@show     | api auth:api |
+| PUT-PATCH | api/contatos/{contato}      | contatos.update  | App\Http\Controllers\ContatoController@update   | api auth:api |
 | DELETE    | api/contatos/{contato}      | contatos.destroy | App\Http\Controllers\ContatoController@destroy  | api auth:api |
-| GET|HEAD  | api/contatos/{contato}/edit | contatos.edit    | App\Http\Controllers\ContatoController@edit     | api auth:api |
+| GET-HEAD  | api/contatos/{contato}/edit | contatos.edit    | App\Http\Controllers\ContatoController@edit     | api auth:api |
 | POST      | api/login                   |                  | App\Http\Controllers\ContatoController@login    | api          |
 | POST      | api/register                |                  | App\Http\Controllers\ContatoController@register | api          |
 
