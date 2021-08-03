@@ -2,6 +2,8 @@
 
 O projeto Amar Assit - CRUD, tem por objetivo guardar informações de contatos (Nome, E-mail e Telefone).
 
+- API REST com autenticação (passport) e testes automatizados.
+
 ## Como instalar o projeto:
 
 - Premissas:
@@ -47,6 +49,11 @@ Na sequência, execute o comando:
 O comando acima irá criar nossas tabelas de migrations e contatos.
 
 ## Registrando usuário na API (Postman):
+
+** Importante:
+- Talvez seja necessário a criação de um token pessoal para pode registrar novos usuários com o comando abaixo:
+
+- php artisan passport:client --personal
 
 Primeiro é necessário registrar para conseguir obter o token de acesso:
 

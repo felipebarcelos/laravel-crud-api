@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\Contato as ContatoResource;
 use Validator;
+use Log;
 
 class ContatoController extends BaseController
 {
@@ -17,8 +18,17 @@ class ContatoController extends BaseController
      */
     public function index()
     {
-        $contatos = Contato::all();    
-        return $this->sendResponse(ContatoResource::collection($contatos), 'Contatos retornados com sucesso.');
+        try {
+    
+            $contatos = Contato::all();  
+            return $this->sendResponse(ContatoResource::collection($contatos), 'Contatos retornados com sucesso.');
+    
+        } catch (\Exception $e) {
+
+            Log::error($e);
+            return $response()->json(['message' => 'Não foi possível listar contatos.'],400);
+
+        }
     }
 
     /**
@@ -40,11 +50,16 @@ class ContatoController extends BaseController
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
-   
-        $contato = Contato::create($input);
-   
-        return $this->sendResponse(new ContatoResource($contato), 'Contato criado com sucesso.');
 
+        try {
+
+            $contato = Contato::create($input);   
+            return $this->sendResponse(new ContatoResource($contato), 'Contato criado com sucesso.');
+
+        } catch (\Exception $e) {
+            Log::error($e);
+            return $response()->json(['message' => 'Não foi possível criar contato.'],400);
+        }
     }
 
     /**
@@ -55,13 +70,20 @@ class ContatoController extends BaseController
      */
     public function show($id)
     {
-        $contato = Contato::find($id);
+        try {
+            
+            $contato = Contato::find($id);
   
-        if (is_null($contato)) {
-            return $this->sendError('Contato não encontrado.');
+            if (is_null($contato)) {
+                return $this->sendError('Contato não encontrado.');
+            }
+    
+            return $this->sendResponse(new ContatoResource($contato), 'Contato retornado com sucesso.');
+
+        } catch (\Exception $e) {
+            Log::error($e);
+            return $response()->json(['message' => 'Não foi possível listar contato.'],400);
         }
-   
-        return $this->sendResponse(new ContatoResource($contato), 'Contato retornado com sucesso.');
     }
 
     /**
@@ -85,12 +107,19 @@ class ContatoController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());       
         }
     
-        $contato->nome = $input['nome'];
-        $contato->telefone = $input['telefone'];
-        $contato->email = $input['email'];
-        $contato->save();
-    
-        return $this->sendResponse(new ContatoResource($contato), 'Contato atualizado com sucesso.');
+        try {
+            
+            $contato->nome = $input['nome'];
+            $contato->telefone = $input['telefone'];
+            $contato->email = $input['email'];
+            $contato->save();
+        
+            return $this->sendResponse(new ContatoResource($contato), 'Contato atualizado com sucesso.');
+
+        } catch (\Exception $e) {
+            Log::error($e);
+            return $response()->json(['message' => 'Não foi possível atualizar contato.'],400);
+        }
     }
 
     /**
@@ -101,8 +130,15 @@ class ContatoController extends BaseController
      */
     public function destroy(Contato $contato)
     {
-        $contato->delete();
+        try {
+            
+            $contato->delete();
    
-        return $this->sendResponse([], 'Contato deletado com sucesso.');
+            return $this->sendResponse([], 'Contato deletado com sucesso.');
+
+        } catch (\Exception $e) {
+            Log::error($e);
+            return $response()->json(['message' => 'Não foi possível remover contato.'],400);
+        }
     }
 }
